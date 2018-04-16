@@ -6,7 +6,7 @@
 
 int main()
 {
-	LinkList L;
+	pLinkList L;
 	LNode ccc,ddd;
 	SqList *cc;
 	SqList a;
@@ -144,8 +144,8 @@ void SqList_Merge(SqList *La, SqList *Lb, SqList *Lc) {
 
 // LinkList function start>>>
 // 2.8
-Status LinkList_GetElem(LinkList L,int i, ElemType *e) {
-  LinkList p;
+Status LinkList_GetElem(pLinkList L,int i, ElemType *e) {
+  pLinkList p;
   p = L->next;   
   int j = 1;           
   while(p && j < i){   
@@ -159,8 +159,8 @@ Status LinkList_GetElem(LinkList L,int i, ElemType *e) {
 }
 
 // 2.9
-Status LinkList_Insert(LinkList L, int i, ElemType e) {
-	LinkList p, s;
+Status LinkList_Insert(pLinkList L, int i, ElemType e) {
+	pLinkList p, s;
 	p = L;
 	int j = 0;
 	while(p && j < i - 1) {
@@ -169,23 +169,24 @@ Status LinkList_Insert(LinkList L, int i, ElemType e) {
 	}
 	if (!p || j > i - 1) 
 		return ERROR;
-	s = (LinkList)malloc(sizeof(LNode));
+	s = (pLinkList)malloc(sizeof(LNode));
 	s->data = e;
 	s->next = p->next;
 	p->next = s;
 	return OK;
 }
 
-/*// 2.10
-Status LinkList_Delete(LinkList L, int i, ElemType &e) {
-	LinkList* p, q;
+// 2.10
+Status LinkList_Delete(pLinkList L, int i, ElemType *e) {
+	pLinkList p, q;
 	p = L;
 	int j = 0;
 	while (p->next && j < i - 1) {
 		p = p->next;
 		++j;
 	}
-	if (!(p->next) || j > i - 1) return ERROR;
+	if (!(p->next) || j > i - 1) 
+		return ERROR;
 	q = p->next;
 	p->next = q->next;
 	e = q->data;
@@ -193,22 +194,23 @@ Status LinkList_Delete(LinkList L, int i, ElemType &e) {
 	return OK;
 }
 
-// 2.11
-void LinkListCreate(LinkList &L, int n) {
-	LinkList p;
+// 2.11 逆向生成单链表
+void LinkList_ReverseCreate(pLinkList L, int n) {
+	pLinkList p;
 	int i;
-	L = (LinkList)malloc(sizeof(LNode));
+	L = (pLinkList)malloc(sizeof(LNode));
 	L->next = NULL;
 	for (i = n; i>0; --i) {
-		p = (LinkList)malloc(sizeof(LNode));
+		p = (pLinkList)malloc(sizeof(LNode));
 		p->data = random(200);
-		p->next = L->next;    L->next = p;
+		p->next = L->next;    
+		L->next = p;
 	}
 }
 
-// 2.12
-void LinkListMerge(LinkList &La, LinkList &Lb, LinkList &Lc) {
-	LinkList pa, pb, pc;
+// 2.12 合并两个有序链表
+void LinkList_Merge(pLinkList La, pLinkList Lb, pLinkList Lc) {
+	pLinkList pa, pb, pc;
 	pa = La->next;
 	pb = Lb->next;
 	Lc = pc = La;
@@ -221,7 +223,9 @@ void LinkListMerge(LinkList &La, LinkList &Lb, LinkList &Lc) {
 	pc->next = pa ? pa : pb;
 	free(Lb);
 }
+// LinkList function end<<<
 
+// Static Linklist function start>>>
 // 2.13
 int LocateElem_SL(SLinkList S, ElemType e) {
 	int i;
@@ -295,7 +299,9 @@ void difference(SLinkList &space, int &S) {  // 算法2.17
 	}
 	printf(")\n");
 }
+// Static Linklist function end<<<
 
+// Circular Linklist function start>>>
 // 2.18
 DuLinkList GetElemP_DuL(DuLinkList va, int i) {
 	DuLinkList p;
@@ -463,4 +469,4 @@ void AddPolyn(PLinkList &Pa, PLinkList &Pb) {  // 算法2.23
 	} // while
 	if (!Empty(Pb)) Append(Pa, qb);
 	FreeNode(hb);
-}*/
+}
