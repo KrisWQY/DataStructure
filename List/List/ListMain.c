@@ -58,6 +58,63 @@ int main()
 
 
 // SqList function start>>>
+int SqList_Length(SqList *L) {
+	return L->length;
+}
+
+void SqList_GetElem(SqList *L, int i, ElemType *e) {
+	e = &(L->elem[i - 1]);
+}
+
+int SqList_IsEmpty(SqList *L) {
+	return L->length ? 0 : 1;
+}
+
+// 2.1
+void SqList_Union(SqList *La, SqList *Lb) {
+	int La_len, Lb_len;
+	int e;
+	La_len = SqList_Length(La);
+	Lb_len = SqList_Length(Lb);
+	for (int i = 1; i <= Lb_len; i++) {
+		SqList_GetElem(La, i, &e);
+		if (!SqList_LocateElem(La, e, Compare))
+			SqList_Insert(La, ++La_len, e);
+	}
+}
+
+// 2.2
+Status SqList_MergeList(SqList *La, SqList *Lb, SqList *Lc) {
+	int i, j, k;
+	int La_len, Lb_len;
+	int *ai, *bj;
+	InitList(Lc);
+	i = j = 1;
+	k = 0;
+	La_len = SqList_Length(La);
+	Lb_len = SqList_Length(Lb);
+	while ((i <= La_len) && (j <= Lb_len)) {
+		SqList_GetElem(La, i, ai);
+		SqList_GetElem(Lb, j, bj);
+		if (*ai <= *bj) {
+			SqList_Insert(Lc, ++k, ai);
+			++i;
+		}
+		else {
+			SqList_Insert(Lc, ++k, bj);
+			++j;
+		}
+	}
+	while (i <= La_len) {
+		SqList_GetElem(La, i++, ai);
+		SqList_Insert(Lc, ++k, ai);
+	}
+	while (j <= Lb_len) {
+		SqList_GetElem(Lb, j++, bj);
+		SqList_Insert(Lc, ++k, bj);
+	}
+	return OK;
+}
 // 2.3
 Status SqList_Init(SqList *L){
 	L->elem = (ElemType *)malloc(LIST_INIT_SIZE * sizeof(ElemType));
@@ -194,6 +251,40 @@ Status LinkList_Delete(pLinkList L, int i, ElemType *e) {
 	return OK;
 }
 
+// 2.11 P30
+void LinkList_Create(pLinkList L, int n) {
+	pLinkList p;
+	L = (pLinkList)malloc(sizeof(LNode));
+	L->next = NULL;
+	for (int i = n; i > 0; i--) {
+		p = (pLinkList)malloc(sizeof(LNode));
+		scanf(&p->data);
+		p->next = L->next;
+		L->next = p;
+	}
+}
+
+// 2.11 P31
+void LinkList_Merge(pLinkList La, pLinkList Lb, pLinkList Lc) {
+	pLinkList pa, pb, pc;
+	pa = La->next;
+	pb = Lb->next;
+	Lc = pc = La;
+	while (pa&&pb) {
+		if (pa->data <= pb->data) {
+			pc->next = pa;
+			pc = pa;
+			pa = pa->next;
+		}
+		else {
+			pc->next = pb;
+			pc = pb;
+			pb = pb->next;
+		}
+	}
+	pc->next = pa ? pa : pb;
+	free(Lb);
+}
 // 2.11 逆向生成单链表
 void LinkList_ReverseCreate(pLinkList L, int n) {
 	pLinkList p;
@@ -226,53 +317,61 @@ void LinkList_Merge(pLinkList La, pLinkList Lb, pLinkList Lc) {
 // LinkList function end<<<
 
 // Static Linklist function start>>>
-// 2.13
-int LocateElem_SL(SLinkList S, ElemType e) {
+// 2.13 P32
+int SLinkList_LocateElem(SLinkList S, ElemType e) {
 	int i;
 	i = S[0].cur;
 	while (i && S[i].data != e) i = S[i].cur;
 	return i;
 }
 
-// 2.14
-void InitSpace_SL(SLinkList space) {
+void SLinkList_Insert() {
+
+}
+
+void SLinkList_Delete() {
+
+}
+
+// 2.14 P33
+void SLinkList_InitSpace(SLinkList space) {
 	for (int i = 0; i<MAXSIZE - 1; ++i)
 		space[i].cur = i + 1;
 	space[MAXSIZE - 1].cur = 0;
 }
 
-// 2.15
-int Malloc_SL(SLinkList &space) {
+// 2.15 P33
+int SLinkList_Malloc(SLinkList space) {
 	int i = space[0].cur;
-	if (space[0].cur) space[0].cur = space[space[0].cur].cur;
+	if (space[0].cur) 
+		space[0].cur = space[i].cur;
 	return i;
 }
 
-// 2.16
-void Free_SL(SLinkList &space, int k) {  // 算法2.16
-										 // 将下标为k的空闲结点回收到备用链表
-	space[k].cur = space[0].cur;    space[0].cur = k;
-} // Free_SL
+// 2.16 P33
+void SLinkList_Free(SLinkList space, int k) {
+	space[k].cur = space[0].cur;    
+	space[0].cur = k;
+}
 
-  // 2.17
-void difference(SLinkList &space, int &S) {  // 算法2.17
-											 // 依次输入集合A和B的元素，在一维数组space中建立表示集合(A-B)∪(B-A)
-											 // 的静态链表, S为头指针。假设备用空间足够大，space[0].cur为头指针。
+// 2.17 P33
+void SLinkList_Difference(SLinkList space, int S) {
 	int i, j, k, m, n, p, r;
 	ElemType b;
-	InitSpace_SL(space);          // 初始化备用空间
-	S = Malloc_SL(space);         // 生成S的头结点
-	r = S;                        // r指向S的当前最后结点
-	m = random(2, 8);              // 输入A的元素个数
-	n = random(2, 8);              // 输入B的元素个数
+	InitSpace_SL(space);          
+	S = Malloc_SL(space);
+	r = S;
+	m = random(2, 8);
+	n = random(2, 8);
 	printf("  A = ( ");
 	initrandom_c1();
-	for (j = 1; j <= m; ++j) {        // 建立集合A的链表
-		i = Malloc_SL(space);      // 分配结点
+	for (j = 1; j <= m; ++j) {
+		i = Malloc_SL(space);
 								   //printf("i=%d   ",i);
-		space[i].data = random_next_c1();   // 输入A的元素值
-		printf("%c ", space[i].data);       // 输出A的元素
-		space[r].cur = i;  r = i;  // 插入到表尾
+		space[i].data = random_next_c1();
+		printf("%c ", space[i].data);
+		space[r].cur = i;  
+		r = i;
 	}
 	printf(")\n");
 	space[r].cur = 0;
@@ -301,8 +400,8 @@ void difference(SLinkList &space, int &S) {  // 算法2.17
 }
 // Static Linklist function end<<<
 
-// Circular Linklist function start>>>
-// 2.18
+// Circular and Double-direction Linklist function start>>>
+// 2.18 P36
 DuLinkList GetElemP_DuL(DuLinkList va, int i) {
 	DuLinkList p;
 	p = va->next;
@@ -316,7 +415,7 @@ DuLinkList GetElemP_DuL(DuLinkList va, int i) {
 }
 
 // 2.19
-Status ListInsert_DuL(DuLinkList &L, int i, ElemType e) {
+Status DuLinkList_Insert(DuLinkList L, int i, ElemType e) {
 	DuLinkList p, s;
 	if (!(p = GetElemP_DuL(L, i)))
 		return ERROR;
@@ -331,8 +430,8 @@ Status ListInsert_DuL(DuLinkList &L, int i, ElemType e) {
 }
 
 // 2.20
-Status ListInsert_L(NLinkList L, int i, ElemType e) {
-	NLink h, s;
+Status LinkList_Insert(LinkList L, int i, ElemType e) {
+	LinkList h, s;
 	if (!LocatePos(L, i - 1, h))
 		return ERROR;
 	if (!MakeNode(s, e))
@@ -341,12 +440,12 @@ Status ListInsert_L(NLinkList L, int i, ElemType e) {
 	return OK;
 }
 
-// 2.21
-Status MergeList_L(NLinkList &La, NLinkList &Lb, NLinkList &Lc,
-	int(*compare)(ElemType, ElemType)) {  // 算法2.21
+// 2.21 P39
+Status MergeList_L(LinkList La, LinkList Lb, LinkList Lc,
+	int(*compare)(ElemType, ElemType)) {
 										  // 已知单链线性表La和Lb的元素按值非递减排列。
 										  // 归并La和Lb得到新的单链线性表Lc，Lc的元素也按值非递减排列。
-	NLink ha, hb;
+	LinkList ha, hb;
 	Position pa, pb, q;
 	ElemType a, b;
 	if (!InitList(Lc)) return ERROR;  // 存储空间分配失败
@@ -369,33 +468,33 @@ Status MergeList_L(NLinkList &La, NLinkList &Lb, NLinkList &Lc,
 	FreeNode(ha);   FreeNode(hb);  // 释放La和Lb的头结点
 	return OK;
 }
+//
 
+// 
 // 2.22
-Status cmp(PElemType a, PElemType b) {
+Status cmp(ElemType a, ElemType b) {
 	if (a.expn >= b.expn) return 1;
 	else return 0;
 }
 
-void CreatPolyn(PLinkList &P, int m) {  // 算法2.22
-										// 输入m项的系数和指数，建立表示一元多项式的有序链表P
+void CreatPolyn(PLinkList &P, int m) {
 	PLink h, q, s;
 	PElemType e;
 	int i;
 	InitList(P);   h = GetHead(P);
 	e.coef = 0.0;  e.expn = -1;
-	SetCurElem(h, e);       // 设置头结点
-	for (i = 1; i <= m; ++i) {  // 依次输入m个非零项
-								// scanf ("%f,%d\n",&e.coef, &e.expn);
+	SetCurElem(h, e); 
+	for (i = 1; i <= m; ++i) {
 		e.coef = (float)(random(1, 90) + random(10) / 10.0);
 		if (random(2)) e.coef = -e.coef;
-		e.expn = e.expn + random(1, 10); //产生随机的数据，但是expn值是递增的
-		if (!LocateElem(P, e, q, cmp)) { // 当前链表中不存在该指数项
-			if (MakeNode(s, e)) InsFirst(q, s);  // 生成结点并插入链表
+		e.expn = e.expn + random(1, 10); 
+		if (!LocateElem(P, e, q, cmp)) {
+			if (MakeNode(s, e)) InsFirst(q, s);
 			if (q == P.tail) P.tail = s;
 		}
-		else i--;  //  如果没有产生插入，则将i值减1
+		else i--;
 	}
-} // CreatPolyn
+}
 
 Status PrintfPoly(PLinkList P) {
 	int i = 0;
@@ -425,32 +524,31 @@ int Compare(PElemType a, PElemType b) {
 	return 0;
 }
 
-void AddPolyn(PLinkList &Pa, PLinkList &Pb) {  // 算法2.23
-											   // 多项式加法：Pa = Pa＋Pb，利用两个多项式的结点构成"和多项式"。
+void AddPolyn(PLinkList &Pa, PLinkList &Pb) {
 	PLink ha, hb, qa, qb;
 	PElemType a, b, temp;
 	float sum;
-	ha = GetHead(Pa);      // ha和hb分别指向Pa和Pb的头结点
+	ha = GetHead(Pa);
 	hb = GetHead(Pb);
-	qa = NextPos(Pa, ha);   // qa和qb分别指向La和Lb中当前结点
+	qa = NextPos(Pa, ha);
 	qb = NextPos(Pb, hb);
-	while (qa && qb) {     // Pa和Pb均非空
-		a = GetCurElem(qa); // a和b为两表中当前比较元素
+	while (qa && qb) {
+		a = GetCurElem(qa);
 		b = GetCurElem(qb);
 		switch (Compare(a, b)) {
-		case -1:  // 多项式PA中当前结点的指数值小
+		case -1:
 			ha = qa;
 			qa = NextPos(Pa, qa);
 			break;
-		case 0:   // 两者的指数值相等
+		case 0:
 			sum = a.coef + b.coef;
-			if (sum != 0.0) {  // 修改多项式PA中当前结点的系数值
+			if (sum != 0.0) {
 				temp.coef = sum;
 				temp.expn = a.expn;
 				SetCurElem(qa, temp);
 				ha = qa;
 			}
-			else {  // 删除多项式PA中当前结点
+			else {
 				DelFirst(ha, qa);
 				FreeNode(qa);
 			}
@@ -459,7 +557,7 @@ void AddPolyn(PLinkList &Pa, PLinkList &Pb) {  // 算法2.23
 			qb = NextPos(Pb, hb);
 			qa = NextPos(Pa, ha);
 			break;
-		case 1:   // 多项式PB中当前结点的指数值小
+		case 1:
 			DelFirst(hb, qb);
 			InsFirst(ha, qb);
 			qb = NextPos(Pb, hb);

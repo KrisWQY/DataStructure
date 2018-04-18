@@ -6,31 +6,35 @@
 
 typedef int ElemType;
 
+// 分别定义了一个简写和有序链表指针
 typedef struct LNode {
 	ElemType data;
 	struct LNode *next;
-}LNode, *pLinkList;//分别定义了一个简写和有序链表指针
+}LNode, *pLinkList;
 
+// 静态链表, SLinkList为结构体数组
 typedef struct {
 	ElemType data;
 	int cur;
-}component, SLinkList[MAXSIZE];//静态链表
+}component, SLinkList[MAXSIZE];
 
-typedef struct {
+// 双向链表
+typedef struct DuLNode{
 	ElemType data;
 	struct DuLNode *prior;
 	struct DuLNode *next;
 }DuLNode, *DuLinkList;
 
-/*typedef struct LNode{
-ElemType data;
-struct LNode *next;
-}*Link, *Position;*/
+// 
+typedef struct LNode{
+	ElemType data;
+	struct LNode *next;
+}*Link, *Position;
 
-/*typedef struct{
-Link head,tail;
-int len;
-}LinkList;*/
+typedef struct{
+	Link head,tail;
+	int len;
+}LinkList;
 
 // 2.10
 Status LinkList_Insert(pLinkList L, int i, ElemType e);

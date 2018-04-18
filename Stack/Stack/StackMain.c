@@ -18,19 +18,19 @@ Status Stack_Init(SqStack *S){
 }
 
 Status Stack_Destroy(SqStack *S) {
-
+	return OK;
 }
 
 Status Stack_Clear(SqStack *S) {
-
+	return OK;
 }
 
 Status Stack_IsEmpty(SqStack *S) {
-
+	return OK;
 }
 
 Status Stack_Length(SqStack *S) {
-
+	return OK;
 }
 
 Status Stack_GetTop(SqStack *S, SElemType *e) {
@@ -60,7 +60,7 @@ Status Stack_Pop(SqStack *S, SElemType e) {
 }
 
 Status Stack_Traverse(SqStack S, Status(*visit)()) {
-
+	return OK;
 }
 
 // Example function start >>>
@@ -80,3 +80,116 @@ void convertDEC2OCT(int Num) //Only positive decimal number
     }
 	printf("\n");
 }
+
+// 3.2 P50
+void LineEdit() {
+	SqStack S;
+	Stack_Init(&S);
+	ch = getchar();
+	while (ch != EOF) {
+		while (ch != EOF &&ch != '\n') {
+			switch (ch){
+				case '#':Pop(S, c); break;
+				case '@':Stack_Clear(&S); break;
+				default:break;   
+			}
+
+			
+		}
+	}
+
+}
+
+// 3.4
+OperandType EvaluateExpression() {
+	Stack_Init(OPTR);
+	Stack_Push(OPTR, '#');
+	Stack_Init(OPND);
+	c = getchar();
+	while (c != '#' || Stack_GetTop(OPTR) != '#') {
+		if (!In(c, OP)) {
+			Push((OPND, c);
+			c = getchar();
+		}
+		else {
+			switch (Precede(GetTop(OPTR), c)) {
+			case'<':
+				Stack_Push(OPTR, c);
+				c = getchar();
+				break;
+			case'=':
+				Stack_Push(OPTR, x);
+				c = getchar();
+				break;
+			case'>':
+				Stack_Pop(OPTR, thera);
+				Stack_Pop(OPND, b);
+				Stack_Pop(OPND, a);
+				Stack_Push(OPND, operate(a, theta, b));
+				break;
+			}
+		}
+	}
+	return Stack_GetTop(OPND);
+}
+
+// 3.5 P55
+void Hanoi(int n, char x, char y, char z) {
+	int c = 0;
+	printf("%i. Move disk %i from %c to %c\n", ++c, n, x, z);
+	if (n == 1)
+		move(x, 1, z);
+	else {
+		hanoi(n - 1, x, z, y);
+		move(x, n, z);
+		hanoi(n - 1, y, x, z);
+	}
+}
+
+// 3.6 P65
+void Bank_Simulation(int CloseTime) {
+	OpenForDay();
+	while (MoreEvent) {
+		EventDrived(OccurTime, EventType);
+		switch (EventType){
+		case'A':CustomerArrived(); break;
+		case'D':CustomerDeparture(); break;
+		default:Invalid();break;
+		}
+
+	}
+}
+
+// 3.7 P67
+void OpenForDay() {
+	TotalTime = 0;
+	CustomerNum = 0;
+	InitList(ev);
+	en.OccurTime = 0;
+	en.NType = 0;
+	OrderInsert(ev, en, cmp);
+	for (i = 1; i <= 4; ++i)
+		InitQueue(q[i]);
+}
+
+void CustomerArrived() {
+	++CustomerNum;
+	Random(durtime, intertime);
+	t = en.OccurTime + intertime;
+	if (t < CloseTime)
+		OrderInsert(ev, (t, 0), cmp);
+	i = Minimum(q);
+	EnQueue(q[i], (en.OccurTime, durtime));
+	if (QueueLength(q[i]) == 1)
+		OrderInsert(ev, (en.OccurTime + durtime, i), cmp);
+}
+
+void CustomerDeparture() {
+	i = en.NType;
+	DelQueue(q[i], customer);
+	TotalTime += en.Occurtime - customer.ArrivalTime;
+	if (!QueueEmpty(q[i])) {
+		GetHead(q[i], customer);
+		OrderInsert(ev, (en.OccurTime + customer.Duration, i), (*cmp)());
+	}
+} 
