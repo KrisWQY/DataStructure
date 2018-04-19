@@ -6,22 +6,19 @@
 
 int main()
 {
-	pLinkList L;
-	LNode ccc,ddd;
-	SqList *cc;
-	SqList a;
+	SqList Sq;
 	int f = 7;
 	int y = 10;
 	int *j;
 	int c[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	ElemType *d = NULL;
 	
-	cc = &a;
 	//cc->elem = &y;
 	//cc->elem[1] = f;
 	//d = cc->elem[0];
 
-	SqList_Init(&a);
+    // SqList Test
+	SqList_Init(&Sq);
 	
 	for (int i = 1; i <= 10; i++) {
 		SqList_Insert(&a, i, c[i - 1]);
@@ -58,18 +55,6 @@ int main()
 
 
 // SqList function start>>>
-int SqList_Length(SqList *L) {
-	return L->length;
-}
-
-void SqList_GetElem(SqList *L, int i, ElemType *e) {
-	e = &(L->elem[i - 1]);
-}
-
-int SqList_IsEmpty(SqList *L) {
-	return L->length ? 0 : 1;
-}
-
 // 2.1
 void SqList_Union(SqList *La, SqList *Lb) {
 	int La_len, Lb_len;
@@ -81,6 +66,18 @@ void SqList_Union(SqList *La, SqList *Lb) {
 		if (!SqList_LocateElem(La, e, Compare))
 			SqList_Insert(La, ++La_len, e);
 	}
+}
+
+int SqList_Length(SqList *L) {
+	return L->length;
+}
+
+void SqList_GetElem(SqList *L, int i, ElemType *e) {
+	e = &(L->elem[i - 1]);
+}
+
+int SqList_IsEmpty(SqList *L) {
+	return L->length ? NOTEMPTY : EMPTY;
 }
 
 // 2.2

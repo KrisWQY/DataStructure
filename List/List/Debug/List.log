@@ -1,14 +1,85 @@
-﻿生成启动时间为 2018/4/14 14:11:55。
-     1>项目“I:\Reference\编程语言\DS\List\List\List.vcxproj”在节点 2 上(Build 个目标)。
+﻿生成启动时间为 2018/4/19 16:23:39。
+     1>项目“I:\Reference\DS\List\List\List.vcxproj”在节点 2 上(Rebuild 个目标)。
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:prompt ListMain.c
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D CODE_ANALYSIS /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze /analyze:plugin"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\\bin\localespc.dll" /errorReport:prompt   /analyze:quiet ListMain.c
          ListMain.c
-     1>i:\reference\编程语言\ds\list\list\listmain.c(15): warning C4101: “j”: 未引用的局部变量
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"I:\Reference\编程语言\DS\List\Debug\List.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"I:\Reference\编程语言\DS\List\Debug\List.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"I:\Reference\编程语言\DS\List\Debug\List.lib" /MACHINE:X86 Debug\ListMain.obj
-         List.vcxproj -> I:\Reference\编程语言\DS\List\Debug\List.exe
-     1>已完成生成项目“I:\Reference\编程语言\DS\List\List\List.vcxproj”(Build 个目标)的操作。
+     1>i:\reference\ds\list\list\include\linklist.h(29): error C2011: “LNode”:“struct”类型重定义
+         i:\reference\ds\list\list\include\linklist.h(10): note: 参见“LNode”的声明
+     1>i:\reference\ds\list\list\include\linklist.h(35): error C2061: 语法错误: 标识符“Link”
+     1>i:\reference\ds\list\list\include\linklist.h(37): error C2059: 语法错误:“}”
+     1>i:\reference\ds\list\list\listmain.c(24): error C2065: “a”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(24): warning C4133: “函数”: 从“int *”到“SqList *”的类型不兼容
+     1>i:\reference\ds\list\list\listmain.c(25): error C2065: “cc”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(25): error C2223: “->elem”的左侧必须指向结构/联合
+     1>i:\reference\ds\list\list\listmain.c(28): error C2065: “a”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(28): warning C4133: “函数”: 从“int *”到“SqList *”的类型不兼容
+     1>i:\reference\ds\list\list\listmain.c(29): error C2065: “a”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(29): warning C4133: “函数”: 从“int *”到“SqList *”的类型不兼容
+     1>i:\reference\ds\list\list\listmain.c(30): error C2065: “a”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(30): warning C4133: “函数”: 从“int *”到“SqList *”的类型不兼容
+     1>i:\reference\ds\list\list\listmain.c(38): error C2065: “cc”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(38): error C2223: “->elem”的左侧必须指向结构/联合
+     1>i:\reference\ds\list\list\listmain.c(42): error C2065: “ddd”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(42): error C2224: “.next”的左侧必须具有结构/联合类型
+     1>i:\reference\ds\list\list\listmain.c(43): error C2065: “ccc”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(43): error C2224: “.data”的左侧必须具有结构/联合类型
+     1>i:\reference\ds\list\list\listmain.c(44): error C2065: “ddd”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(44): error C2224: “.data”的左侧必须具有结构/联合类型
+     1>i:\reference\ds\list\list\listmain.c(46): error C2065: “ccc”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(46): error C2224: “.next”的左侧必须具有结构/联合类型
+     1>i:\reference\ds\list\list\listmain.c(46): error C2065: “ddd”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(48): error C2065: “L”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(48): error C2065: “ccc”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(48): warning C4047: “=”:“int”与“int *”的间接级别不同
+     1>i:\reference\ds\list\list\listmain.c(50): error C2065: “L”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(50): error C2223: “->data”的左侧必须指向结构/联合
+     1>i:\reference\ds\list\list\listmain.c(50): error C2065: “cc”: 未声明的标识符
+     1>i:\reference\ds\list\list\listmain.c(50): error C2223: “->elem”的左侧必须指向结构/联合
+     1>i:\reference\ds\list\list\listmain.c(88): warning C4013: “InitList”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(97): warning C4047: “函数”:“ElemType”与“int *”的间接级别不同
+     1>i:\reference\ds\list\list\listmain.c(97): warning C4024: “SqList_Insert”: 形参和实参 3 的类型不同
+     1>i:\reference\ds\list\list\listmain.c(101): warning C4047: “函数”:“ElemType”与“int *”的间接级别不同
+     1>i:\reference\ds\list\list\listmain.c(101): warning C4024: “SqList_Insert”: 形参和实参 3 的类型不同
+     1>i:\reference\ds\list\list\listmain.c(107): warning C4047: “函数”:“ElemType”与“int *”的间接级别不同
+     1>i:\reference\ds\list\list\listmain.c(107): warning C4024: “SqList_Insert”: 形参和实参 3 的类型不同
+     1>i:\reference\ds\list\list\listmain.c(111): warning C4047: “函数”:“ElemType”与“int *”的间接级别不同
+     1>i:\reference\ds\list\list\listmain.c(111): warning C4024: “SqList_Insert”: 形参和实参 3 的类型不同
+     1>i:\reference\ds\list\list\listmain.c(246): warning C4047: “=”:“ElemType *”与“ElemType”的间接级别不同
+     1>i:\reference\ds\list\list\listmain.c(258): warning C4133: “函数”: 从“ElemType *”到“const char *const ”的类型不兼容
+     1>i:\reference\ds\list\list\listmain.c(293): warning C4013: “random”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(300): error C2084: 函数“void LinkList_Merge(pLinkList,pLinkList,pLinkList)”已有主体
+         i:\reference\ds\list\list\listmain.c(265): note: 参见“LinkList_Merge”的前一个定义
+     1>i:\reference\ds\list\list\listmain.c(358): warning C4013: “InitSpace_SL”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(359): warning C4013: “Malloc_SL”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(364): warning C4013: “initrandom_c1”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(368): warning C4013: “random_next_c1”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(392): warning C4013: “Free_SL”未定义；假设外部返回 int
+     1>i:\reference\ds\list\list\listmain.c(430): error C2146: 语法错误: 缺少“)”(在标识符“L”的前面)
+     1>i:\reference\ds\list\list\listmain.c(430): error C2061: 语法错误: 标识符“L”
+     1>i:\reference\ds\list\list\listmain.c(430): error C2059: 语法错误:“;”
+     1>i:\reference\ds\list\list\listmain.c(430): error C2059: 语法错误:“,”
+     1>i:\reference\ds\list\list\listmain.c(430): error C2059: 语法错误:“)”
+     1>i:\reference\ds\list\list\listmain.c(441): error C2146: 语法错误: 缺少“)”(在标识符“La”的前面)
+     1>i:\reference\ds\list\list\listmain.c(441): error C2061: 语法错误: 标识符“La”
+     1>i:\reference\ds\list\list\listmain.c(441): error C2059: 语法错误:“;”
+     1>i:\reference\ds\list\list\listmain.c(441): error C2059: 语法错误:“,”
+     1>i:\reference\ds\list\list\listmain.c(473): error C2224: “.expn”的左侧必须具有结构/联合类型
+     1>i:\reference\ds\list\list\listmain.c(477): error C2143: 语法错误: 缺少“)”(在“&”的前面)
+     1>i:\reference\ds\list\list\listmain.c(477): error C2143: 语法错误: 缺少“{”(在“&”的前面)
+     1>i:\reference\ds\list\list\listmain.c(477): error C2059: 语法错误:“&”
+     1>i:\reference\ds\list\list\listmain.c(477): error C2059: 语法错误:“)”
+     1>i:\reference\ds\list\list\listmain.c(496): error C2146: 语法错误: 缺少“)”(在标识符“P”的前面)
+     1>i:\reference\ds\list\list\listmain.c(496): error C2061: 语法错误: 标识符“P”
+     1>i:\reference\ds\list\list\listmain.c(496): error C2059: 语法错误:“;”
+     1>i:\reference\ds\list\list\listmain.c(496): error C2059: 语法错误:“)”
+     1>i:\reference\ds\list\list\listmain.c(496): error C2449: 在文件范围内找到“{”(是否缺少函数头?)
+     1>i:\reference\ds\list\list\listmain.c(515): error C2059: 语法错误:“}”
+     1>i:\reference\ds\list\list\listmain.c(524): error C2143: 语法错误: 缺少“)”(在“&”的前面)
+     1>i:\reference\ds\list\list\listmain.c(524): error C2143: 语法错误: 缺少“{”(在“&”的前面)
+     1>i:\reference\ds\list\list\listmain.c(524): error C2059: 语法错误:“&”
+     1>i:\reference\ds\list\list\listmain.c(524): error C2059: 语法错误:“)”
+     1>已完成生成项目“I:\Reference\DS\List\List\List.vcxproj”(Rebuild 个目标)的操作 - 失败。
 
-已成功生成。
+生成失败。
 
-已用时间 00:00:00.98
+已用时间 00:00:01.26
